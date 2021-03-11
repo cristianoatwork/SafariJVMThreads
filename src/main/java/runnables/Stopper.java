@@ -1,15 +1,18 @@
 package runnables;
 
 public class Stopper {
-  static boolean stop = false;
+  static /*volatile*/ boolean stop = false;
 
   static class MyJob implements Runnable {
 
     @Override
     public void run() {
       System.out.println(Thread.currentThread().getName() + " starting...");
-      while (! stop)
-        ;
+      int x = 0;
+      while (! stop) {
+//        if (x % 1000 == 0) System.out.print(".");
+//        x++;
+      }
       System.out.println(Thread.currentThread().getName() + " stopping...");
     }
   }
